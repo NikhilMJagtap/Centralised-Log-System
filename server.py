@@ -7,7 +7,7 @@ if __name__ == "__main__":
 	soc = socket(AF_INET, SOCK_STREAM)
 	# host = gethostname()
 	soc.bind((HOST, PORT))
-	soc.listen()
+	soc.listen(1)
 	print("Listening to ", HOST ," on port ", PORT)
 
 	while True:
