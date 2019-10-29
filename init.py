@@ -1,11 +1,12 @@
-#!/usr/bin/python3
-
+#!/usr/bin/python
+import crontab
 import argparse
 import fileinput
 import sys
 import ipaddress
 from changer import change
 from parameters import *
+from cron import *
 
 
 FLAGS = []
@@ -41,6 +42,26 @@ if __name__ == "__main__":
 		# default=10000,
 		help='The port for the server. This port must match with server.py file running \
 		on the server. Default port number is 10000')
+
+	parser.add_argument('-m', '--minute',
+		type=str,
+		default='0',
+		help='Schedule minute for cronjob. Default value is 0. Should be in range of 0 to 59. Use / for every minute schedulig. * mean for each minute.')
+
+	parser.add_argument('-H', '--hour',
+		type=str,
+		default='/12',
+		help='Schedule hour for cronjob. Default value is /12 i.e. every 12 hour. Range: 0-23')
+
+	parser.add_argument('-d', '--day',
+		type=str,
+		default='*',
+		help='Schedule day for cronjob. Default value is * i.e. each day. Range: 1-31')
+
+	parser.add_argument('-M', '--month',
+		type=str,
+		default='*',
+		help='Schedule month for cronjob. Default value is * i.e. each month. Range 1-12')
 
 	FLAGS, _ = parser.parse_known_args()
 
@@ -106,4 +127,11 @@ if __name__ == "__main__":
 			change('PORT', FLAGS.port)
 			print('The port changed to ', FLAGS.port)	
 
-	
+	# handling cronjob
+	if not CRON_JOB_SCHEDULED:
+		change('CRON_JOB_SCHEDULED', "True")
+		add_cron_tab()
+	else:
+		# print("Cron update with", FLAGS.minute, FLAGS.hour, FLAGS.day, FLAGS.month)
+		update_cron_tab(minute=FLAGS.minute, hour=FLAGS.hour, day=FLAGS.day, month=FLAGS.month)
+		# list_cron_tabs()

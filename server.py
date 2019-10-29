@@ -1,5 +1,6 @@
 from socket import socket, gethostname, AF_INET, SOCK_STREAM
 import sys
+import os
 from parameters import *
 
 if __name__ == "__main__":
@@ -13,7 +14,12 @@ if __name__ == "__main__":
 	while True:
 		connection, address = soc.accept()
 		print("Serving ", address)
-		f = open('log.txt', 'wb')
+		# f = open('./log.txt', 'wb')
+		if os.path.exists('./logs/'+address[0]):
+			f = open('./logs/'+address[0]+'/log.txt', 'wb')
+		else:
+			os.makedirs('./logs/'+address[0])
+			f = open('./logs/'+address[0]+'/log.txt', 'wb')
 		data = connection.recv(BUFF_SIZE)
 		while(data):
 			f.write(data)

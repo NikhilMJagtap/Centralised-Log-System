@@ -22,7 +22,7 @@ IMPORTANT = False
 ALL  =  False
 
 # crontab parameters
-# TODO: Add cronjob
+CRON_JOB_SCHEDULED = False
 
 # Sorting parameters
 # TODO: Add sorting parameters
