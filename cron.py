@@ -4,7 +4,7 @@ import os
 import sys
 import pwd
 
-COMMAND = "./opt/Centralised-Log-System/init.py"
+COMMAND = "python3 ~/Desktop/Centralised-Log-System/client.py"
 
 '''
 crontab syntax:

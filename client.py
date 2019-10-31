@@ -1,7 +1,7 @@
 from parameters import *
 from socket import socket, gethostname, AF_INET, SOCK_STREAM
 import sys
-
+print("Executing client.py")
 if __name__ == '__main__':
 	
 	soc = socket(AF_INET, SOCK_STREAM)
@@ -22,7 +22,9 @@ if __name__ == '__main__':
 				print("Failed read file", file)
 				continue
 			data = f.read(BUFF_SIZE)
-
+			data_header = file
+			soc.send(data_header.encode('utf-8'))
+			print("Sending ",file," header")
 			while data:
 				soc.send(data)
 				data = f.read(BUFF_SIZE)
@@ -41,7 +43,9 @@ if __name__ == '__main__':
 				print("Failed read file", file)
 				continue
 			data = f.read(BUFF_SIZE)
-
+			data_header = file
+			soc.send(data_header.encode('utf-8'))
+			print("Sending ",file," header")
 			while data:
 				soc.send(data)
 				data = f.read(BUFF_SIZE)
@@ -59,7 +63,9 @@ if __name__ == '__main__':
 				print("Failed read file", file)
 				continue
 			data = f.read(BUFF_SIZE)
-
+			data_header = file
+			soc.send(data_header.encode('utf-8'))
+			print("Sending ",file," header")
 			while data:
 				soc.send(data)
 				data = f.read(BUFF_SIZE)

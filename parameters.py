@@ -12,17 +12,17 @@ HOST = '0.0.0.0'
 
 CRITICAL_FILES = ['/var/log/auth.log']
 
-IMPORTANT_FILES = []
+IMPORTANT_FILES = ['/var/log/syslog']
 
-ALL_FILES = []
+ALL_FILES = ['/var/log/dpkg.log']
 
 
 CRITICAL  =  True
-IMPORTANT = False
-ALL  =  False
+IMPORTANT = True
+ALL  =  True
 
 # crontab parameters
-CRON_JOB_SCHEDULED = False
+CRON_JOB_SCHEDULED = True
 
 # Sorting parameters
 # TODO: Add sorting parameters
