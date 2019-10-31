@@ -22,7 +22,7 @@ if __name__ == '__main__':
 				print("Failed read file", file)
 				continue
 			data = f.read(BUFF_SIZE)
-			data_header = file
+			data_header = "********" + file
 			soc.send(data_header.encode('utf-8'))
 			print("Sending ",file," header")
 			while data:
@@ -43,7 +43,7 @@ if __name__ == '__main__':
 				print("Failed read file", file)
 				continue
 			data = f.read(BUFF_SIZE)
-			data_header = file
+			data_header = "********" + file
 			soc.send(data_header.encode('utf-8'))
 			print("Sending ",file," header")
 			while data:
@@ -63,7 +63,7 @@ if __name__ == '__main__':
 				print("Failed read file", file)
 				continue
 			data = f.read(BUFF_SIZE)
-			data_header = file
+			data_header = "********" + file
 			soc.send(data_header.encode('utf-8'))
 			print("Sending ",file," header")
 			while data:
