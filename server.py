@@ -117,7 +117,7 @@ if __name__ == "__main__":
 				print("First message not data header!")
 				break
 			
-		# f.close()
-		# connection.close()
+		print("Connection terminated!")
+		connection.close()
 	sys.exit()
  
