@@ -1,7 +1,21 @@
 from parameters import *
 from socket import socket, gethostname, AF_INET, SOCK_STREAM
 import sys
+import time
 print("Executing client.py")
+
+
+def create_data_header(file):
+	"""
+	Creates a data header for a given file name
+	"""
+	file_name_length = len(file)
+	data_header = "*"*8 + file + "*"*(1024-file_name_length-8)
+	return data_header
+
+def create_data_trailer(file):
+	return "^"*8 + file + "^"*(1024-len(file)-8)
+
 if __name__ == '__main__':
 	
 	soc = socket(AF_INET, SOCK_STREAM)
@@ -21,14 +35,21 @@ if __name__ == '__main__':
 			except:
 				print("Failed read file", file)
 				continue
-			data = f.read(BUFF_SIZE)
-			data_header = "********" + file
+
+			# data_header = "********" + file
+			data_header = create_data_header(file)
 			soc.send(data_header.encode('utf-8'))
 			print("Sending ",file," header")
+				
+			data = f.read(BUFF_SIZE)
+			#time.sleep(0.5)
 			while data:
+				print("Sending contents of ",file)
 				soc.send(data)
 				data = f.read(BUFF_SIZE)
-
+			data_trailer = create_data_trailer(file)
+			soc.send(data_trailer.encode('utf-8'))
+			print("Sending trailer of ",file)
 			f.close()
 
 
@@ -42,14 +63,20 @@ if __name__ == '__main__':
 			except:
 				print("Failed read file", file)
 				continue
-			data = f.read(BUFF_SIZE)
-			data_header = "********" + file
+			# data_header = "********" + file
+			data_header = create_data_header(file)
 			soc.send(data_header.encode('utf-8'))
 			print("Sending ",file," header")
+
+			data = f.read(BUFF_SIZE)
+			#time.sleep(0.5)
 			while data:
+				print("Sending contents of ",file)
 				soc.send(data)
 				data = f.read(BUFF_SIZE)
-
+			data_trailer = create_data_trailer(file)
+			soc.send(data_trailer.encode('utf-8'))	
+			print("Sending trailer of ",file)
 			f.close()
 
 	if ALL:
@@ -62,14 +89,20 @@ if __name__ == '__main__':
 			except:
 				print("Failed read file", file)
 				continue
-			data = f.read(BUFF_SIZE)
-			data_header = "********" + file
+
+			# data_header = "********" + file
+			data_header = create_data_header(file)
 			soc.send(data_header.encode('utf-8'))
 			print("Sending ",file," header")
+
+			data = f.read(BUFF_SIZE)
 			while data:
+				print("Sending contents of ",file)
 				soc.send(data)
 				data = f.read(BUFF_SIZE)
-
+			data_trailer = create_data_trailer(file)
+			soc.send(data_trailer.encode('utf-8'))
+			print("Sending trailer of ",file)
 			f.close()	
 
 	soc.close()

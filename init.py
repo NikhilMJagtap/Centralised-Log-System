@@ -45,7 +45,7 @@ if __name__ == "__main__":
 
 	parser.add_argument('-m', '--minute',
 		type=str,
-		help='Schedule minute for cronjob. Default value is 0. Should be in range of 0 to 59. Use / for every minute schedulig. * mean for each minute.')
+		help='Schedule minute for cronjob. Default value is 0. Should be in range of 0 to 59. Use / for every minute scheduling. * mean for each minute.')
 
 	parser.add_argument('-H', '--hour',
 		type=str,
