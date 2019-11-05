@@ -89,6 +89,7 @@ if __name__ == "__main__":
 
 			data_header = is_data_header(data_)
 			if data_header!=False:
+				print("Header detected!")
 				file_name = data_header
 				print("File name :" , file_name)
 				if os.path.exists('./logs/'+address[0]):
@@ -109,6 +110,7 @@ if __name__ == "__main__":
 					is_trailer = is_data_trailer(data_)
 
 					if is_trailer==True:
+						print("Trailer detected!")
 						f.close()
 						break
 					else:

@@ -10,11 +10,23 @@ def create_data_header(file):
 	Creates a data header for a given file name
 	"""
 	file_name_length = len(file)
-	data_header = "*"*8 + file + "*"*(1024-file_name_length-8)
+	data_header = "*"*8 + file + "*"*(BUFF_SIZE-file_name_length-8)
 	return data_header
 
 def create_data_trailer(file):
-	return "^"*8 + file + "^"*(1024-len(file)-8)
+	return "^"*8 + file + "^"*(BUFF_SIZE-len(file)-8)
+
+def pad(data):
+	if len(data) == BUFF_SIZE:
+		print(len(data))
+		return data
+	else:
+		print(len(data))
+		data_length = len(data)
+		data_ = str(data)
+		data_+=" "*(BUFF_SIZE - data_length)
+		print("Length padded :",BUFF_SIZE - data_length)
+		return data_.encode('utf-8')
 
 if __name__ == '__main__':
 	
@@ -45,7 +57,7 @@ if __name__ == '__main__':
 			#time.sleep(0.5)
 			while data:
 				print("Sending contents of ",file)
-				soc.send(data)
+				soc.send(pad(data))
 				data = f.read(BUFF_SIZE)
 			data_trailer = create_data_trailer(file)
 			soc.send(data_trailer.encode('utf-8'))
@@ -72,7 +84,7 @@ if __name__ == '__main__':
 			#time.sleep(0.5)
 			while data:
 				print("Sending contents of ",file)
-				soc.send(data)
+				soc.send(pad(data))
 				data = f.read(BUFF_SIZE)
 			data_trailer = create_data_trailer(file)
 			soc.send(data_trailer.encode('utf-8'))	
@@ -98,7 +110,7 @@ if __name__ == '__main__':
 			data = f.read(BUFF_SIZE)
 			while data:
 				print("Sending contents of ",file)
-				soc.send(data)
+				soc.send(pad(data))
 				data = f.read(BUFF_SIZE)
 			data_trailer = create_data_trailer(file)
 			soc.send(data_trailer.encode('utf-8'))

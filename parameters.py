@@ -5,7 +5,7 @@ This file is just for clients' parameters.
 
 PORT  =  10000
 BUFF_SIZE = 1024
-HOST = '127.0.0.1'
+HOST = '172.16.31.53'
 
 
 # files parameters
@@ -14,7 +14,7 @@ CRITICAL_FILES = ['/var/log/auth.log']
 
 IMPORTANT_FILES = ['/var/log/syslog']
 
-ALL_FILES = ['/var/log/auth.log']
+ALL_FILES = []
 
 
 CRITICAL  =  True
